@@ -8,7 +8,7 @@ on:
       - 'v*.*.*'
 
 env:
-  DOCKER_IMAGE: yasminemarzouk/template-fe
+  DOCKER_IMAGE: yasminemarzouk/template-be
 
 jobs:
 
@@ -75,7 +75,7 @@ jobs:
       - name: Update Deployment Image
         run: |
           IMAGE_TAG=${{ needs.build-and-push.outputs.sha }}
-          sed -i 's|image: '${{ env.DOCKER_IMAGE }}':.*|image: '${{ env.DOCKER_IMAGE }}':'"$IMAGE_TAG"'|' base/fe-deployment.yaml
-          git add base/fe-deployment.yaml
+          sed -i 's|image: '${{ env.DOCKER_IMAGE }}':.*|image: '${{ env.DOCKER_IMAGE }}':'"$IMAGE_TAG"'|' base/be-deployment.yaml
+          git add base/be-deployment.yaml
           git commit -m "Update image version to $IMAGE_TAG"
           git push
