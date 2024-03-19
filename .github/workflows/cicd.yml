@@ -75,6 +75,7 @@ jobs:
       - name: Update Deployment Image
         run: |
           IMAGE_TAG=${{ needs.build-and-push.outputs.sha }}
+          ls -la
           sed -i 's|image: '${{ env.DOCKER_IMAGE }}':.*|image: '${{ env.DOCKER_IMAGE }}':'"$IMAGE_TAG"'|' base/be-deployment.yaml
           git add base/be-deployment.yaml
           git commit -m "Update image version to $IMAGE_TAG"
